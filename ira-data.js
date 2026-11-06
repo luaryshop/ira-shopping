@@ -10,16 +10,19 @@ export { COLECOES, IMAGE_BASE };
 const comTempo = (p, ms) => Promise.race([p, new Promise((_, r) => setTimeout(() => r(new Error("tempo esgotado")), ms))]);
 
 // Converte o documento (em português) para o formato interno do app.
-export function normalizar(n, i = 0) {
+export function normalizar(n, i = 0, hoje = new Date()) {
   const h = n.horarios;
+  // Plano vencido volta a valer como Gratuito (3 fotos, sem selo) até ser renovado.
+  const vencido = n.plano && n.plano !== "gratis" && n.planoAte && new Date(n.planoAte + "T23:59:59") < hoje;
+  const plano = vencido ? "gratis" : n.plano || "gratis";
   return {
     id: n.id, name: n.nome, cat: n.categoria, sub: n.subcategoria || "", tags: n.servicos || [], desc: n.descricao || "",
     bairro: n.bairro || "", end: n.endereco || "—", t24: h === "24h",
     h: h === "24h" ? { wk: [0, 24], sat: [0, 24], sun: [0, 24] } : { wk: h?.seg_sex ?? null, sat: h?.sab ?? null, sun: h?.dom ?? null },
-    phone: n.telefone || "", wa: n.whatsapp || "", plan: n.plano || "gratis",
+    phone: n.telefone || "", wa: n.whatsapp || "", plan: plano, ver: n.fotosVersao || "",
     n: [Number(n.nota?.media) || 0, Number(n.nota?.qtd) || 0],
     t: n.entrega?.tempo || "", f: n.entrega ? Number(n.entrega.frete) || 0 : undefined,
-    ret: !!n.retirada, orc: !!n.orcamento, photos: Math.min(10, Math.max(1, Number(n.fotos) || 1)),
+    ret: !!n.retirada, orc: !!n.orcamento, photos: Math.min(plano === "gratis" ? 3 : 10, Math.max(1, Number(n.fotos) || 1)),
     ativo: n.ativo !== false, ordem: n.ordem ?? i, i,
   };
 }
@@ -39,12 +42,18 @@ export async function carregarNegocios() {
   return { lista, fonte };
 }
 
-export const urlFoto = (id, i) => `${IMAGE_BASE}${id}/${String(i + 1).padStart(2, "0")}.webp`;
-export const urlLogo = (id) => `${IMAGE_BASE}${id}/logo.webp`;
+const v = (ver) => (ver ? `?v=${ver}` : "");
+export const urlFoto = (id, i, ver = "") => `${IMAGE_BASE}${id}/${String(i + 1).padStart(2, "0")}.webp${v(ver)}`;
+export const urlLogo = (id, ver = "") => `${IMAGE_BASE}${id}/logo.webp${v(ver)}`;
 
 // Conta o contato (WhatsApp ou ligação). Falha em silêncio: nunca atrapalha o clique.
 export async function registrarContato(negocioId, tipo, origem = "app") {
   try {
     await addDoc(collection(db, COLECOES.contatos), { negocioId, tipo, origem, criadoEm: serverTimestamp() });
   } catch (e) { /* regras ainda não publicadas ou offline */ }
+}
+
+// Cadastro enviado pela própria empresa ("Cadastre sua empresa"). Fica pendente até o painel aprovar.
+export async function enviarCadastro({ nome, categoria, whatsapp }) {
+  await addDoc(collection(db, COLECOES.cadastros), { nome: String(nome).slice(0, 80), categoria: String(categoria).slice(0, 30), whatsapp: String(whatsapp).slice(0, 25), status: "novo", criadoEm: serverTimestamp() });
 }

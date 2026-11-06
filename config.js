@@ -6,9 +6,16 @@ export const firebaseConfig = { apiKey: "AIzaSyCanlMwdfuD9gmVt62nJYYetj4K2-BfWEc
 export const CIDADE = { nome: "Iracemápolis", uf: "SP" };
 
 // Coleções no Firestore (prefixo evita misturar com a loja Luary).
-export const COLECOES = { negocios: "ira_negocios", categorias: "ira_categorias", contatos: "ira_contatos" };
+export const COLECOES = { negocios: "ira_negocios", categorias: "ira_categorias", contatos: "ira_contatos", cadastros: "ira_cadastros" };
 
 // Onde ficam as fotos: images/<id-do-negocio>/01.webp ... 10.webp e logo.webp
 // Para usar o GitHub/jsDelivr, suba a pasta "ira" no repositório de imagens e troque por:
 //   "https://cdn.jsdelivr.net/gh/luaryshop/luary-cdn@main/ira/"
 export const IMAGE_BASE = "images/";
+
+// Onde o painel publica as fotos (repositório GitHub). Para o teste, o mesmo repositório do site.
+// O token (com permissão de escrita em "Contents") é digitado no painel e não fica salvo.
+export const GITHUB = { user: "luaryshop", repo: "ira-shopping", branch: "main", pasta: "images" };
+
+// Valores mensais usados só para estimar a receita no painel.
+export const PRECOS = { gratis: 0, destaque: 79, premium: 149 };

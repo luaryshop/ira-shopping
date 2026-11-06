@@ -5,93 +5,294 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Ira Shopping | Painel</title>
 <style>
-:root{--bg:#f5f7fc;--ink:#0f2557;--muted:#5d6b8c;--line:#dde3f1;--brand:#1b4fc4;--orange:#f26a1b;--ok:#12803f;--bad:#b4432b;--card:#fff}
+:root{--bg:#f5f7fc;--ink:#0f2557;--muted:#5d6b8c;--line:#dde3f1;--brand:#1b4fc4;--orange:#f26a1b;--ok:#12803f;--bad:#b4432b;--card:#fff;--tint:#e8eefc}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
-.wrap{max-width:980px;margin:0 auto;padding:16px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-h1{font-size:24px;margin:0}h1 b{color:var(--brand)}h1 i{color:var(--orange);font-style:normal}
-.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px}
-input{font:inherit;padding:11px;border:1.5px solid var(--line);border-radius:10px;width:100%;margin-top:4px}
-button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;cursor:pointer;background:var(--brand);color:#fff}
-button.sec{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
-button:disabled{opacity:.5;cursor:default}
-table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;padding:6px}
-td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:middle}td.n{text-align:right;font-variant-numeric:tabular-nums}
-.tabwrap{overflow-x:auto}
-.pill{font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;background:#e8eefc}
-.pill.on{background:#e2f5e9;color:var(--ok)}.pill.off{background:#fbe9e4;color:var(--bad)}
-.msg{font-size:14px;margin:8px 0 0;color:var(--muted)}.err{color:var(--bad)}
 [hidden]{display:none!important}
+.wrap{max-width:1040px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+h1{font-size:24px;margin:0}h1 b{color:var(--brand)}h1 i{color:var(--orange);font-style:normal}h2{font-size:19px;margin:0 0 10px}h3{font-size:15px;margin:14px 0 6px}
+a{color:var(--brand)}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px}
+.tabs button{flex:none;background:#fff;color:var(--ink);border:1.5px solid var(--line);position:relative}
+.tabs button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.badge{display:inline-block;min-width:20px;padding:0 6px;border-radius:99px;background:var(--orange);color:#fff;font-size:12px;margin-left:6px;text-align:center}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+label{display:grid;gap:4px;font-weight:600;font-size:14px}
+input,select,textarea{font:inherit;padding:10px;border:1.5px solid var(--line);border-radius:10px;width:100%;background:#fff;color:var(--ink)}
+input[type=checkbox]{width:auto}
+button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:10px 14px;cursor:pointer;background:var(--brand);color:#fff}
+button.sec{background:#fff;color:var(--ink);border:1.5px solid var(--line)}button.warn{background:#fff;color:var(--bad);border:1.5px solid var(--bad)}
+button:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.row>*{flex:1 1 180px}.row>.fit{flex:0 0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{background:var(--tint);border-radius:14px;padding:12px}.kpi b{display:block;font-size:24px}.kpi span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;padding:6px}
+td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:middle}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--tint);white-space:nowrap}
+.pill.on{background:#e2f5e9;color:var(--ok)}.pill.off,.pill.venc{background:#fbe9e4;color:var(--bad)}.pill.aviso{background:#fdf0d5;color:#8a5a00}
+.msg{font-size:14px;color:var(--muted);margin:8px 0 0}.err{color:var(--bad)}
+.veil{position:fixed;inset:0;background:rgba(8,16,40,.55);z-index:40;overflow:auto;padding:12px}
+.modal{background:#fff;max-width:760px;margin:0 auto;border-radius:18px;padding:18px}
+.hr3{display:grid;grid-template-columns:110px auto 1fr 1fr;gap:8px;align-items:center;margin-bottom:6px}
+.fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.foto{border:1.5px solid var(--line);border-radius:10px;overflow:hidden;background:var(--tint);font-size:12px}
+.foto img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}.foto div{display:flex;gap:2px;padding:4px}.foto button{padding:2px 8px;flex:1}
+.bars{display:flex;align-items:flex-end;gap:2px;height:90px}.bars i{flex:1;background:var(--brand);border-radius:3px 3px 0 0;min-height:2px}
+textarea.out{min-height:110px}
 </style>
 </head>
 <body><div class="wrap">
-<header><h1><b>Ira</b> <i>Shopping</i> · Painel</h1><div><a href="index.html">Ver o app</a> · <button class="sec" id="sair" hidden>Sair</button></div></header>
+<header><h1><b>Ira</b> <i>Shopping</i> · Painel</h1><div><a href="index.html">Ver o app</a> <button class="sec" id="sair" hidden>Sair</button></div></header>
 
-<section class="card" id="login" hidden>
-  <h2 style="margin-top:0">Entrar</h2>
-  <form id="f-login"><label>E-mail<input id="email" type="email" required autocomplete="username"></label>
-  <label style="display:block;margin-top:10px">Senha<input id="senha" type="password" required autocomplete="current-password"></label>
-  <p><button>Entrar</button></p><p class="msg err" id="login-erro"></p></form>
-  <p class="msg">Use o mesmo administrador do Firebase da Luary.</p>
+<section class="card" id="login" hidden style="max-width:420px">
+  <h2>Entrar</h2>
+  <form id="f-login" style="display:grid;gap:10px"><label>E-mail<input id="email" type="email" required autocomplete="username"></label>
+  <label>Senha<input id="senha" type="password" required autocomplete="current-password"></label>
+  <button>Entrar</button><p class="msg err" id="login-erro"></p></form>
 </section>
 
 <div id="app" hidden>
-  <section class="card">
-    <h2 style="margin-top:0">Dados de exemplo</h2>
-    <p class="msg">Grava no Firestore as 5 categorias e as 6 empresas fictícias de <code>data/negocios.json</code> (coleções <code>ira_*</code>). Pode repetir sem medo: os mesmos documentos são sobrescritos.</p>
-    <p><button id="seed">Carregar dados de exemplo no Firestore</button></p><p class="msg" id="seed-msg"></p>
-  </section>
-  <section class="card">
-    <h2 style="margin-top:0">Empresas e contatos</h2>
-    <div class="tabwrap"><table><thead><tr><th>Empresa</th><th>Plano</th><th>Situação</th><th class="n">WhatsApp</th><th class="n">Ligar</th><th></th></tr></thead><tbody id="linhas"></tbody></table></div>
-    <p class="msg" id="lista-msg"></p><p><button class="sec" id="recarregar">Atualizar</button></p>
-  </section>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  <section id="painel"></section>
 </div>
 </div>
-<script type="module">
-import { app, db, COLECOES } from "./ira-data.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { collection, getDocs, doc, setDoc, updateDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-const auth = getAuth(app), $ = (s) => document.querySelector(s);
-const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const PLANOS = { premium: "Premium", destaque: "Destaque", gratis: "Gratuito" };
 
-async function listar() {
-  $("#lista-msg").textContent = "Carregando…";
+<div class="veil" id="veil" hidden><div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-titulo"></div></div>
+
+<script type="module">
+import { app, db, COLECOES, IMAGE_BASE, normalizar } from "./ira-data.js";
+import { PRECOS, GITHUB } from "./config.js";
+import { GitHubCDN, toWebP } from "./ira-cdn.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { collection, getDocs, doc, setDoc, updateDoc, deleteDoc, writeBatch, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const auth = getAuth(app), $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const CATS = ["Comida", "Mercado", "Bebidas", "Lojas", "Serviços"];
+const PLANOS = { gratis: "Gratuito", destaque: "Destaque", premium: "Premium" };
+const brl = (n) => "R$ " + Number(n).toFixed(2).replace(".", ",");
+const ms = (v) => (v?.toMillis ? v.toMillis() : v?.seconds ? v.seconds * 1000 : typeof v === "string" || typeof v === "number" ? Date.parse(v) || +v || 0 : 0);
+const slug = (s) => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 50);
+const hoje = () => new Date().toISOString().slice(0, 10);
+const diasAte = (d) => Math.ceil((new Date(d + "T23:59:59") - new Date()) / 864e5);
+const dec = (t) => { if (!t) return null; const [h, m] = t.split(":").map(Number); return h + m / 60; };
+const hhmm = (n) => { const h = Math.floor(n), m = Math.round((n - h) * 60); return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0"); };
+const limiteFotos = (plano) => (plano === "gratis" ? 3 : 10);
+
+let neg = [], cad = [], cont = [], aba = "resumo", filtro = { q: "", plano: "", sit: "" }, periodo = 30, erroLeitura = "";
+
+async function carregar() {
+  erroLeitura = "";
   try {
-    const [n, c] = await Promise.all([getDocs(collection(db, COLECOES.negocios)), getDocs(collection(db, COLECOES.contatos))]);
-    const cont = {};
-    c.docs.forEach((d) => { const x = d.data(); (cont[x.negocioId] ||= { whatsapp: 0, ligar: 0 })[x.tipo]++; });
-    const itens = n.docs.map((d) => ({ id: d.id, ...d.data() })).sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0));
-    $("#linhas").innerHTML = itens.map((e) => `<tr><td><b>${esc(e.nome)}</b><br><small>${esc(e.categoria)} · ${esc(e.subcategoria || "")}</small></td>
-      <td><span class="pill">${PLANOS[e.plano] || esc(e.plano)}</span></td>
-      <td><span class="pill ${e.ativo === false ? "off" : "on"}">${e.ativo === false ? "Pausada" : "Ativa"}</span></td>
-      <td class="n">${cont[e.id]?.whatsapp || 0}</td><td class="n">${cont[e.id]?.ligar || 0}</td>
-      <td><button class="sec" data-id="${esc(e.id)}" data-ativo="${e.ativo === false ? 0 : 1}">${e.ativo === false ? "Ativar" : "Pausar"}</button></td></tr>`).join("");
-    $("#lista-msg").textContent = itens.length ? `${itens.length} empresa(s). Contatos contados: ${c.size}.` : "Nenhuma empresa no Firestore ainda. Use “Carregar dados de exemplo”.";
-  } catch (e) { $("#lista-msg").innerHTML = '<span class="err">Não foi possível ler o Firestore. Confira se as regras do Ira foram publicadas (veja LEIA-ME.md).</span>'; console.error(e); }
+    neg = (await getDocs(collection(db, COLECOES.negocios))).docs.map((d) => ({ ...d.data(), id: d.id })).sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0));
+    cad = (await getDocs(collection(db, COLECOES.cadastros))).docs.map((d) => ({ ...d.data(), id: d.id })).sort((a, b) => ms(b.criadoEm) - ms(a.criadoEm));
+    cont = (await getDocs(query(collection(db, COLECOES.contatos), orderBy("criadoEm", "desc"), limit(5000)))).docs.map((d) => d.data());
+  } catch (e) { console.error(e); erroLeitura = "Não foi possível ler o Firestore. Confira se as regras do Ira foram publicadas e se você entrou com o administrador (veja LEIA-ME.md)."; }
+  desenhar();
 }
-$("#linhas").addEventListener("click", async (ev) => {
-  const b = ev.target.closest("button[data-id]"); if (!b) return; b.disabled = true;
-  try { await updateDoc(doc(db, COLECOES.negocios, b.dataset.id), { ativo: b.dataset.ativo === "0" }); } catch (e) { alert("Sem permissão para alterar. Confira as regras e o login."); }
-  listar();
-});
-$("#seed").addEventListener("click", async () => {
-  const m = $("#seed-msg"); m.className = "msg"; m.textContent = "Gravando…"; $("#seed").disabled = true;
+const contatos = (id, dias) => { const lim = Date.now() - dias * 864e5; const r = { whatsapp: 0, ligar: 0 }; cont.forEach((c) => { if ((!id || c.negocioId === id) && ms(c.criadoEm) >= lim && r[c.tipo] !== undefined) r[c.tipo]++; }); return r; };
+const pendentes = () => cad.filter((c) => c.status !== "aprovado");
+const situacao = (e) => { if (e.ativo === false) return ["off", "Pausada"]; if (e.plano !== "gratis" && e.planoAte) { const d = diasAte(e.planoAte); if (d < 0) return ["venc", "Plano vencido"]; if (d <= 15) return ["aviso", `Vence em ${d} d`]; } return ["on", "Ativa"]; };
+
+function desenhar() {
+  const T = [["resumo", "Resumo"], ["empresas", "Empresas"], ["cadastros", "Cadastros"], ["contatos", "Contatos"]];
+  $("#tabs").innerHTML = T.map(([k, l]) => `<button role="tab" data-aba="${k}" aria-selected="${aba === k}">${l}${k === "cadastros" && pendentes().length ? `<span class="badge">${pendentes().length}</span>` : ""}</button>`).join("");
+  $("#painel").innerHTML = (erroLeitura ? `<div class="card"><p class="msg err">${esc(erroLeitura)}</p></div>` : "") + ({ resumo, empresas, cadastros, contatos: contatosTab }[aba])();
+}
+
+function resumo() {
+  const ativas = neg.filter((e) => e.ativo !== false), pagas = ativas.filter((e) => e.plano !== "gratis" && !(e.planoAte && diasAte(e.planoAte) < 0));
+  const receita = pagas.reduce((a, e) => a + (PRECOS[e.plano] || 0), 0), c7 = contatos(null, 7), c30 = contatos(null, 30);
+  const venc = neg.filter((e) => e.plano !== "gratis" && e.planoAte && diasAte(e.planoAte) <= 15).sort((a, b) => a.planoAte.localeCompare(b.planoAte));
+  const top = neg.map((e) => ({ e, t: contatos(e.id, 30).whatsapp + contatos(e.id, 30).ligar })).sort((a, b) => b.t - a.t).slice(0, 5).filter((x) => x.t);
+  return `<div class="grid">
+    <div class="kpi"><span>Empresas ativas</span><b>${ativas.length}</b></div><div class="kpi"><span>Pagantes</span><b>${pagas.length}</b></div>
+    <div class="kpi"><span>Receita mensal estimada</span><b>${brl(receita)}</b></div><div class="kpi"><span>Contatos em 7 dias</span><b>${c7.whatsapp + c7.ligar}</b></div>
+    <div class="kpi"><span>Contatos em 30 dias</span><b>${c30.whatsapp + c30.ligar}</b></div><div class="kpi"><span>Cadastros novos</span><b>${pendentes().length}</b></div></div>
+  <div class="card" style="margin-top:14px"><h2>Planos para renovar</h2>${venc.length ? `<div class="tw"><table><tbody>${venc.map((e) => { const d = diasAte(e.planoAte); return `<tr><td><b>${esc(e.nome)}</b></td><td>${PLANOS[e.plano]}</td><td>${esc(e.planoAte.split("-").reverse().join("/"))}</td><td><span class="pill ${d < 0 ? "venc" : "aviso"}">${d < 0 ? "Vencido há " + -d + " d" : "Vence em " + d + " d"}</span></td><td><button class="sec" data-edit="${esc(e.id)}">Abrir</button></td></tr>`; }).join("")}</tbody></table></div>` : '<p class="msg">Nenhum plano vencendo nos próximos 15 dias.</p>'}</div>
+  <div class="card"><h2>Mais procuradas (30 dias)</h2>${top.length ? `<ol style="margin:0;padding-left:20px">${top.map((x) => `<li><b>${esc(x.e.nome)}</b>: ${x.t} contatos</li>`).join("")}</ol>` : '<p class="msg">Ainda não há contatos registrados.</p>'}</div>`;
+}
+
+function empresas() {
+  const q = filtro.q.toLowerCase();
+  const lista = neg.filter((e) => (!q || (e.nome + " " + e.categoria + " " + (e.subcategoria || "")).toLowerCase().includes(q)) && (!filtro.plano || e.plano === filtro.plano) && (!filtro.sit || situacao(e)[0] === filtro.sit));
+  return `<div class="card"><div class="row"><label>Buscar<input id="f-q" value="${esc(filtro.q)}" placeholder="Nome ou categoria"></label>
+    <label>Plano<select id="f-plano"><option value="">Todos</option>${Object.entries(PLANOS).map(([k, v]) => `<option value="${k}" ${filtro.plano === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
+    <label>Situação<select id="f-sit"><option value="">Todas</option>${[["on", "Ativa"], ["aviso", "Vencendo"], ["venc", "Vencida"], ["off", "Pausada"]].map(([k, v]) => `<option value="${k}" ${filtro.sit === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
+    <div class="fit"><button data-act="nova">+ Nova empresa</button></div></div>
+    <div class="tw" style="margin-top:12px"><table><thead><tr><th>Empresa</th><th>Plano</th><th>Situação</th><th class="n">Contatos 30d</th><th></th></tr></thead><tbody>
+    ${lista.map((e) => { const [k, t] = situacao(e), c = contatos(e.id, 30); return `<tr><td><b>${esc(e.nome)}</b><br><small>${esc(e.categoria)} · ${esc(e.subcategoria || "")}</small></td><td><span class="pill">${PLANOS[e.plano] || esc(e.plano)}</span></td><td><span class="pill ${k}">${t}</span></td><td class="n">${c.whatsapp + c.ligar}</td>
+      <td style="white-space:nowrap"><button class="sec" data-edit="${esc(e.id)}">Editar</button> <button class="sec" data-pausa="${esc(e.id)}">${e.ativo === false ? "Ativar" : "Pausar"}</button></td></tr>`; }).join("") || '<tr><td colspan="5" class="msg">Nenhuma empresa. Use “+ Nova empresa” ou carregue os exemplos abaixo.</td></tr>'}</tbody></table></div>
+    <p class="msg">${lista.length} de ${neg.length} empresa(s).</p></div>
+  <div class="card"><h2>Dados de exemplo</h2><p class="msg">Grava as 6 empresas fictícias de <code>data/negocios.json</code> no Firestore (sobrescreve as de mesmo id).</p><p><button class="sec" id="seed">Carregar dados de exemplo</button></p><p class="msg" id="seed-msg"></p></div>`;
+}
+
+function cadastros() {
+  const p = pendentes();
+  return `<div class="card"><h2>Cadastros recebidos pelo app</h2>${p.length ? `<div class="tw"><table><thead><tr><th>Empresa</th><th>Categoria</th><th>WhatsApp</th><th>Recebido</th><th></th></tr></thead><tbody>${p.map((c) => `<tr><td><b>${esc(c.nome)}</b></td><td>${esc(c.categoria)}</td><td>${esc(c.whatsapp)}</td><td>${ms(c.criadoEm) ? new Date(ms(c.criadoEm)).toLocaleDateString("pt-BR") : "—"}</td>
+    <td style="white-space:nowrap"><button data-aprovar="${esc(c.id)}">Aprovar e completar</button> <button class="warn" data-descartar="${esc(c.id)}">Descartar</button></td></tr>`).join("")}</tbody></table></div>` : '<p class="msg">Nenhum cadastro novo.</p>'}
+    <p class="msg">Antes de aprovar, confirme o WhatsApp falando com a empresa.</p></div>`;
+}
+
+function contatosTab() {
+  const dias = periodo, lim = Date.now() - dias * 864e5, porDia = {};
+  cont.forEach((c) => { const t = ms(c.criadoEm); if (t >= lim) { const k = new Date(t).toISOString().slice(0, 10); porDia[k] = (porDia[k] || 0) + 1; } });
+  const ds = Array.from({ length: dias }, (_, i) => new Date(Date.now() - (dias - 1 - i) * 864e5).toISOString().slice(0, 10)), max = Math.max(1, ...ds.map((d) => porDia[d] || 0));
+  const lin = neg.map((e) => ({ e, c: contatos(e.id, dias) })).sort((a, b) => b.c.whatsapp + b.c.ligar - (a.c.whatsapp + a.c.ligar));
+  return `<div class="card"><div class="row"><label>Período<select id="f-per">${[7, 30, 90].map((d) => `<option value="${d}" ${periodo === d ? "selected" : ""}>Últimos ${d} dias</option>`).join("")}</select></label><div class="fit"><button class="sec" data-act="csv">Baixar CSV</button></div></div>
+    <h3>Contatos por dia</h3><div class="bars" aria-label="Contatos por dia">${ds.map((d) => `<i title="${d.split("-").reverse().join("/")}: ${porDia[d] || 0}" style="height:${Math.round(((porDia[d] || 0) / max) * 100)}%"></i>`).join("")}</div>
+    <div class="tw" style="margin-top:12px"><table><thead><tr><th>Empresa</th><th class="n">WhatsApp</th><th class="n">Ligar</th><th class="n">Total</th><th></th></tr></thead><tbody>${lin.map(({ e, c }) => `<tr><td>${esc(e.nome)}</td><td class="n">${c.whatsapp}</td><td class="n">${c.ligar}</td><td class="n"><b>${c.whatsapp + c.ligar}</b></td><td><button class="sec" data-rel="${esc(e.id)}">Relatório</button></td></tr>`).join("")}</tbody></table></div>
+    <p class="msg">Os contatos contam toques nos botões do app (não garantem que a pessoa concluiu a conversa). O painel lê os 5.000 registros mais recentes.</p></div>`;
+}
+
+/* ---------- editor de empresa ---------- */
+let ed = null, cdn = new GitHubCDN(), fotosEdit = null;
+const vazio = () => ({ id: "", nome: "", categoria: "Comida", subcategoria: "", servicos: [], descricao: "", bairro: "", endereco: "", horarios: { seg_sex: [9, 18], sab: [9, 13], dom: null }, telefone: "", whatsapp: "", plano: "gratis", planoAte: "", nota: { media: 0, qtd: 0 }, entrega: null, retirada: false, orcamento: false, fotos: 0, fotosVersao: "", ativo: true, ordem: neg.length + 1 });
+function abrir(e, origem) {
+  ed = { novo: !e.id || !neg.some((n) => n.id === e.id), origem, d: structuredClone({ ...vazio(), ...e }) }; fotosEdit = null; cdn.setToken("");
+  const d = ed.d, h = d.horarios, t24 = h === "24h";
+  const linha = (k, l) => { const v = t24 ? null : h[k]; return `<div class="hr3"><span>${l}</span><label style="display:flex;gap:6px;align-items:center;font-weight:500"><input type="checkbox" data-h="${k}-f" ${!v ? "checked" : ""}> Fechado</label><input type="time" data-h="${k}-a" value="${v ? hhmm(v[0]) : ""}"><input type="time" data-h="${k}-z" value="${v ? hhmm(v[1]) : ""}"></div>`; };
+  $("#modal").innerHTML = `<h2 id="m-titulo">${ed.novo ? "Nova empresa" : "Editar: " + esc(d.nome)}</h2><form id="f-emp" style="display:grid;gap:12px">
+   <div class="row"><label>Nome *<input id="e-nome" required maxlength="80" value="${esc(d.nome)}"></label><label>Identificador<input id="e-id" ${ed.novo ? "" : "readonly"} value="${esc(d.id)}" placeholder="gerado a partir do nome"></label></div>
+   <div class="row"><label>Categoria *<select id="e-cat">${CATS.map((c) => `<option ${d.categoria === c ? "selected" : ""}>${c}</option>`).join("")}</select></label><label>Subcategoria<input id="e-sub" list="subs" value="${esc(d.subcategoria)}" placeholder="Ex.: Pizzarias"><datalist id="subs">${[...new Set(neg.map((n) => n.subcategoria).filter(Boolean))].map((s) => `<option value="${esc(s)}">`).join("")}</datalist></label></div>
+   <label>Descrição<textarea id="e-desc" rows="3" maxlength="300">${esc(d.descricao)}</textarea></label>
+   <label>Serviços e produtos (separados por vírgula)<input id="e-serv" value="${esc((d.servicos || []).join(", "))}"></label>
+   <div class="row"><label>Bairro<input id="e-bairro" value="${esc(d.bairro)}"></label><label>Endereço<input id="e-end" value="${esc(d.endereco)}"></label></div>
+   <div class="row"><label>WhatsApp * (com DDD)<input id="e-wa" inputmode="tel" value="${esc(d.whatsapp)}" placeholder="19 9 1234-5678"></label><label>Telefone para ligar<input id="e-tel" inputmode="tel" value="${esc(d.telefone)}" placeholder="(19) 3000-0000"></label></div>
+   <div class="card" style="margin:0"><h3 style="margin-top:0">Plano</h3><div class="row"><label>Plano<select id="e-plano">${Object.entries(PLANOS).map(([k, v]) => `<option value="${k}" ${d.plano === k ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Válido até<input id="e-ate" type="date" value="${esc(d.planoAte)}"></label><label>Ordem na lista<input id="e-ord" type="number" value="${d.ordem ?? 0}"></label></div></div>
+   <div class="card" style="margin:0"><h3 style="margin-top:0">Atendimento</h3>
+    <div class="row"><label style="display:flex;gap:8px;align-items:center;font-weight:500"><input type="checkbox" id="e-24" ${t24 ? "checked" : ""}> Aberto 24 horas</label>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:500"><input type="checkbox" id="e-ret" ${d.retirada ? "checked" : ""}> Retirada no local</label>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:500"><input type="checkbox" id="e-orc" ${d.orcamento ? "checked" : ""}> Trabalha com orçamento</label></div>
+    <div id="horas" ${t24 ? "hidden" : ""} style="margin-top:10px">${linha("seg_sex", "Seg a sex")}${linha("sab", "Sábado")}${linha("dom", "Domingo")}</div>
+    <div class="row" style="margin-top:10px"><label style="display:flex;gap:8px;align-items:center;font-weight:500"><input type="checkbox" id="e-ent" ${d.entrega ? "checked" : ""}> Faz entrega</label><label>Tempo de entrega<input id="e-tempo" value="${esc(d.entrega?.tempo || "")}" placeholder="30 – 45 min"></label><label>Frete (R$, 0 = grátis)<input id="e-frete" type="number" min="0" step="0.5" value="${d.entrega?.frete ?? 0}"></label></div></div>
+   <div class="card" style="margin:0"><h3 style="margin-top:0">Avaliação exibida</h3><div class="row"><label>Nota (0 a 5)<input id="e-nota" type="number" min="0" max="5" step="0.1" value="${d.nota?.media ?? 0}"></label><label>Nº de avaliações<input id="e-qtd" type="number" min="0" value="${d.nota?.qtd ?? 0}"></label></div><p class="msg">Informe só avaliações reais. Deixe 0 para ocultar.</p></div>
+   <label style="display:flex;gap:8px;align-items:center;font-weight:500"><input type="checkbox" id="e-ativo" ${d.ativo !== false ? "checked" : ""}> Empresa ativa (aparece no app)</label>
+   <p class="msg err" id="e-erro" role="alert"></p>
+   <div class="row"><div class="fit"><button>Salvar</button></div><div class="fit"><button type="button" class="sec" data-act="fechar">Cancelar</button></div>${ed.novo ? "" : '<div class="fit"><button type="button" class="warn" data-act="apagar">Apagar empresa</button></div>'}</div></form>
+   ${ed.novo ? '<p class="msg">Salve a empresa para poder enviar as fotos.</p>' : '<div id="fotos-box"></div>'}`;
+  $("#veil").hidden = false; document.body.style.overflow = "hidden"; $("#e-nome").focus(); if (!ed.novo) desenharFotos();
+}
+function fechar() { $("#veil").hidden = true; document.body.style.overflow = ""; ed = null; fotosEdit = null; }
+function lerForm() {
+  const v = (id) => $("#" + id).value.trim(), d = ed.d, t24 = $("#e-24").checked;
+  const wa0 = v("e-wa").replace(/\D/g, ""), wa = wa0.length <= 11 ? "55" + wa0 : wa0;
+  const nome = v("e-nome"); if (nome.length < 2) throw new Error("Informe o nome da empresa.");
+  if (!/^55\d{10,11}$/.test(wa)) throw new Error("WhatsApp inválido. Use DDD + número, por exemplo 19 9 1234-5678.");
+  const id = ed.novo ? slug(v("e-id") || nome) : d.id; if (!id) throw new Error("Identificador inválido.");
+  if (ed.novo && neg.some((n) => n.id === id)) throw new Error("Já existe uma empresa com o identificador “" + id + "”.");
+  let horarios = "24h";
+  if (!t24) { horarios = {}; for (const [k, l] of [["seg_sex", "Seg a sex"], ["sab", "Sábado"], ["dom", "Domingo"]]) { if ($(`[data-h="${k}-f"]`).checked) horarios[k] = null; else { const a = dec($(`[data-h="${k}-a"]`).value), z = dec($(`[data-h="${k}-z"]`).value); if (a == null || z == null || z <= a) throw new Error(`Horário de “${l}” inválido (a hora de fechar deve ser depois da de abrir).`); horarios[k] = [a, z]; } } }
+  const plano = v("e-plano"), ate = v("e-ate"); if (plano !== "gratis" && !ate) throw new Error("Informe até quando o plano pago vale.");
+  const ent = $("#e-ent").checked, nota = Number(v("e-nota")) || 0;
+  if (nota < 0 || nota > 5) throw new Error("A nota deve ficar entre 0 e 5.");
+  return { ...d, id, nome, categoria: v("e-cat"), subcategoria: v("e-sub"), descricao: v("e-desc"), servicos: v("e-serv").split(",").map((s) => s.trim()).filter(Boolean), bairro: v("e-bairro"), endereco: v("e-end") || "—", telefone: v("e-tel"), whatsapp: wa, horarios, plano, planoAte: plano === "gratis" ? "" : ate, ordem: Number(v("e-ord")) || 0, retirada: $("#e-ret").checked, orcamento: $("#e-orc").checked, entrega: ent ? { tempo: v("e-tempo"), frete: Number(v("e-frete")) || 0 } : null, nota: { media: nota, qtd: Math.max(0, Math.floor(Number(v("e-qtd")) || 0)) }, ativo: $("#e-ativo").checked };
+}
+
+/* ---------- fotos (GitHub) ---------- */
+const pasta = (id) => `${GITHUB.pasta}/${id}`;
+function desenharFotos() {
+  const box = $("#fotos-box"); if (!box) return; const d = ed.d, max = limiteFotos(d.plano);
+  if (!fotosEdit) { box.innerHTML = `<hr><h3>Fotos (${d.fotos || 0} de até ${max})</h3><p class="msg">Fotos atuais salvas no GitHub. Para trocar, reordenar ou enviar novas, é preciso um token do GitHub com permissão de escrita em <code>${esc(GITHUB.user)}/${esc(GITHUB.repo)}</code>.</p>
+    <div class="row"><label>Token do GitHub<input id="tok" type="password" autocomplete="off" placeholder="ghp_… (não fica salvo)"></label><div class="fit"><button type="button" class="sec" data-act="foto-carregar">Gerenciar fotos</button></div></div><p class="msg" id="foto-msg"></p>`; return; }
+  const F = fotosEdit;
+  box.innerHTML = `<hr><h3>Fotos (${F.fotos.length} de até ${max})</h3><div class="fotos">${F.fotos.map((f, i) => `<div class="foto"><img alt="Foto ${i + 1}" src="${f.url}"><div><button type="button" class="sec" data-fm="${i}:-1" aria-label="Mover para trás">‹</button><button type="button" class="sec" data-fm="${i}:1" aria-label="Mover para frente">›</button><button type="button" class="warn" data-fx="${i}" aria-label="Remover">×</button></div></div>`).join("") || '<p class="msg">Sem fotos.</p>'}</div>
+   <div class="row" style="margin-top:10px"><label>Adicionar fotos<input id="fotos-in" type="file" accept="image/*" multiple></label><label>Logo (quadrada)<input id="logo-in" type="file" accept="image/*"></label></div>
+   <p class="msg">${F.logo ? "Logo: " + (F.logo.blob ? "nova (será enviada)" : "atual") : "Sem logo."} · A 1ª foto é a capa. As imagens são reduzidas para 1200 px e convertidas para WebP.</p>
+   <div class="row"><div class="fit"><button type="button" data-act="foto-publicar">Publicar fotos</button></div></div><p class="msg" id="foto-msg"></p>`;
+}
+async function carregarFotos() {
+  const m = $("#foto-msg"); m.className = "msg"; m.textContent = "Conferindo o token…";
   try {
-    const dados = await (await fetch("data/negocios.json", { cache: "no-store" })).json();
-    const lote = writeBatch(db);
-    dados.categorias.forEach((c) => lote.set(doc(db, COLECOES.categorias, c.id), c));
-    dados.negocios.forEach((n) => lote.set(doc(db, COLECOES.negocios, n.id), n));
-    await lote.commit();
-    m.textContent = `Pronto: ${dados.categorias.length} categorias e ${dados.negocios.length} empresas gravadas.`; listar();
-  } catch (e) { m.className = "msg err"; m.textContent = "Não foi possível gravar. Publique as regras do Ira e entre com o administrador."; console.error(e); }
-  $("#seed").disabled = false;
+    cdn.setToken($("#tok").value); await cdn.verify(); m.textContent = "Carregando fotos…";
+    const { files } = await cdn.listFolder(pasta(ed.d.id)), base = `https://raw.githubusercontent.com/${GITHUB.user}/${GITHUB.repo}/${GITHUB.branch}/`;
+    fotosEdit = { fotos: files.filter((f) => /^\d{2}\.webp$/.test(f.name)).map((f) => ({ sha: f.sha, url: base + f.path + "?v=" + f.sha.slice(0, 7) })), logo: files.find((f) => f.name === "logo.webp") ? { sha: files.find((f) => f.name === "logo.webp").sha } : null };
+    desenharFotos();
+  } catch (e) { m.className = "msg err"; m.textContent = e.message; }
+}
+async function publicarFotos() {
+  const m = $("#foto-msg"), F = fotosEdit, max = limiteFotos(ed.d.plano);
+  if (F.fotos.length > max) { m.className = "msg err"; m.textContent = `O plano ${PLANOS[ed.d.plano]} permite até ${max} fotos. Remova ${F.fotos.length - max}.`; return; }
+  m.className = "msg"; m.textContent = "Publicando…"; $("[data-act=foto-publicar]").disabled = true;
+  try {
+    const entries = F.fotos.map((f, i) => ({ name: String(i + 1).padStart(2, "0") + ".webp", ...(f.blob ? { blob: f.blob } : { sha: f.sha }) }));
+    if (F.logo) entries.push({ name: "logo.webp", ...(F.logo.blob ? { blob: F.logo.blob } : { sha: F.logo.sha }) });
+    await cdn.commitFolder(pasta(ed.d.id), entries, `Fotos de ${ed.d.nome} (painel Ira)`);
+    const ver = Date.now().toString(36);
+    await updateDoc(doc(db, COLECOES.negocios, ed.d.id), { fotos: F.fotos.length, fotosVersao: ver });
+    Object.assign(ed.d, { fotos: F.fotos.length, fotosVersao: ver }); const i = neg.findIndex((n) => n.id === ed.d.id); if (i >= 0) Object.assign(neg[i], { fotos: F.fotos.length, fotosVersao: ver });
+    fotosEdit = null; desenharFotos(); $("#fotos-box").insertAdjacentHTML("beforeend", '<p class="msg" style="color:var(--ok)">Fotos publicadas. No site, podem levar 1 a 2 minutos para aparecer.</p>');
+  } catch (e) { m.className = "msg err"; m.textContent = e.message; const b = $("[data-act=foto-publicar]"); if (b) b.disabled = false; }
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener("click", async (ev) => {
+  const t = ev.target; let b;
+  if ((b = t.closest("[data-aba]"))) { aba = b.dataset.aba; return desenhar(); }
+  if ((b = t.closest("[data-edit]"))) return abrir(neg.find((n) => n.id === b.dataset.edit));
+  if ((b = t.closest("[data-pausa]"))) { const e = neg.find((n) => n.id === b.dataset.pausa); b.disabled = true; try { await updateDoc(doc(db, COLECOES.negocios, e.id), { ativo: e.ativo === false }); e.ativo = e.ativo === false; } catch { alert("Sem permissão para alterar. Confira as regras e o login."); } return desenhar(); }
+  if ((b = t.closest("[data-aprovar]"))) { const c = cad.find((x) => x.id === b.dataset.aprovar); return abrir({ nome: c.nome, categoria: CATS.includes(c.categoria) ? c.categoria : "Comida", whatsapp: c.whatsapp, id: "" }, c.id); }
+  if ((b = t.closest("[data-descartar]"))) { b.disabled = true; try { await deleteDoc(doc(db, COLECOES.cadastros, b.dataset.descartar)); cad = cad.filter((c) => c.id !== b.dataset.descartar); } catch { alert("Não foi possível descartar."); } return desenhar(); }
+  if ((b = t.closest("[data-rel]"))) return relatorio(b.dataset.rel);
+  if ((b = t.closest("[data-fm]"))) { const [i, d] = b.dataset.fm.split(":").map(Number), a = fotosEdit.fotos, j = i + d; if (j >= 0 && j < a.length) [a[i], a[j]] = [a[j], a[i]]; return desenharFotos(); }
+  if ((b = t.closest("[data-fx]"))) { fotosEdit.fotos.splice(+b.dataset.fx, 1); return desenharFotos(); }
+  const act = t.closest("[data-act]")?.dataset.act;
+  if (act === "nova") return abrir({});
+  if (act === "fechar" || t === $("#veil")) return fechar();
+  if (act === "csv") return csv();
+  if (act === "foto-carregar") return carregarFotos();
+  if (act === "foto-publicar") return publicarFotos();
+  if (act === "fechar-rel") return fechar();
+  if (act === "copiar") { const ta = $("#rel-txt"); try { await navigator.clipboard.writeText(ta.value); b = t; t.textContent = "Copiado"; } catch { ta.select(); t.textContent = "Selecionado"; } return; }
+  if (act === "apagar") { const m = $("#e-erro"); if (!ed.confirmar) { ed.confirmar = true; m.textContent = "Toque em “Apagar empresa” de novo para confirmar. Isso não apaga as fotos do GitHub."; return; } try { await deleteDoc(doc(db, COLECOES.negocios, ed.d.id)); neg = neg.filter((n) => n.id !== ed.d.id); fechar(); desenhar(); } catch { m.textContent = "Não foi possível apagar."; } return; }
+  if (t.id === "seed") return semear();
 });
-$("#recarregar").addEventListener("click", listar);
-$("#f-login").addEventListener("submit", async (e) => { e.preventDefault(); $("#login-erro").textContent = "";
-  try { await signInWithEmailAndPassword(auth, $("#email").value, $("#senha").value); } catch { $("#login-erro").textContent = "Não foi possível entrar. Confira e-mail e senha."; } });
+document.addEventListener("change", async (ev) => {
+  const t = ev.target;
+  if (t.id === "f-plano") { filtro.plano = t.value; return desenhar(); } if (t.id === "f-sit") { filtro.sit = t.value; return desenhar(); } if (t.id === "f-per") { periodo = +t.value; return desenhar(); }
+  if (t.id === "e-24") $("#horas").hidden = t.checked;
+  if (t.id === "e-plano" && fotosEdit) { ed.d.plano = t.value; desenharFotos(); }
+  if (t.id === "fotos-in") { const m = $("#foto-msg"), max = limiteFotos(ed.d.plano); try { m.className = "msg"; m.textContent = "Convertendo…"; for (const f of t.files) { if (fotosEdit.fotos.length >= max) break; const blob = await toWebP(f, { maxSide: 1200, quality: 0.82 }); fotosEdit.fotos.push({ blob, url: URL.createObjectURL(blob) }); } desenharFotos(); if (t.files.length + 0 > 0 && fotosEdit.fotos.length >= max) $("#foto-msg").textContent = `Limite de ${max} fotos do plano ${PLANOS[ed.d.plano]}.`; } catch (e) { m.className = "msg err"; m.textContent = e.message; } }
+  if (t.id === "logo-in" && t.files[0]) { try { const blob = await toWebP(t.files[0], { maxSide: 400, frame: "crop", quality: 0.85 }); fotosEdit.logo = { blob, url: URL.createObjectURL(blob) }; desenharFotos(); } catch (e) { $("#foto-msg").className = "msg err"; $("#foto-msg").textContent = e.message; } }
+});
+document.addEventListener("input", (ev) => { if (ev.target.id === "f-q") { filtro.q = ev.target.value; const pos = ev.target.selectionStart; desenhar(); const i = $("#f-q"); i.focus(); i.setSelectionRange(pos, pos); } });
+document.addEventListener("submit", async (ev) => {
+  if (ev.target.id === "f-login") { ev.preventDefault(); $("#login-erro").textContent = ""; try { await signInWithEmailAndPassword(auth, $("#email").value, $("#senha").value); } catch { $("#login-erro").textContent = "Não foi possível entrar. Confira e-mail e senha."; } return; }
+  if (ev.target.id === "f-emp") {
+    ev.preventDefault(); const erro = $("#e-erro"); erro.textContent = "";
+    try {
+      const d = lerForm(), antigo = neg.find((n) => n.id === d.id); const limpo = JSON.parse(JSON.stringify(d));
+      await setDoc(doc(db, COLECOES.negocios, d.id), limpo);
+      if (ed.origem) { try { await updateDoc(doc(db, COLECOES.cadastros, ed.origem), { status: "aprovado" }); const c = cad.find((x) => x.id === ed.origem); if (c) c.status = "aprovado"; } catch {} }
+      if (antigo) Object.assign(antigo, limpo); else neg.push(limpo); neg.sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0));
+      const era = ed.novo; ed.novo = false; ed.d = d; ed.origem = null;
+      if (era) { abrir(d); $("#fotos-box")?.insertAdjacentHTML("afterbegin", '<p class="msg" style="color:var(--ok)">Empresa criada. Agora você pode enviar as fotos.</p>'); } else fechar();
+      desenhar();
+    } catch (e) { erro.textContent = e.message || "Não foi possível salvar. Confira as regras e o login."; }
+  }
+});
+document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !$("#veil").hidden) fechar(); });
+
+async function semear() {
+  const m = $("#seed-msg"); m.className = "msg"; m.textContent = "Gravando…";
+  try {
+    const dados = await (await fetch("data/negocios.json", { cache: "no-store" })).json(), lote = writeBatch(db);
+    dados.categorias.forEach((c) => lote.set(doc(db, COLECOES.categorias, c.id), c)); dados.negocios.forEach((n) => lote.set(doc(db, COLECOES.negocios, n.id), n));
+    await lote.commit(); await carregar();
+  } catch (e) { m.className = "msg err"; m.textContent = "Não foi possível gravar. Publique as regras do Ira e entre com o administrador."; console.error(e); }
+}
+function relatorio(id) {
+  const e = neg.find((n) => n.id === id), c = contatos(id, periodo), total = c.whatsapp + c.ligar;
+  const txt = `Olá, ${e.nome}! Segue o resumo dos últimos ${periodo} dias no Ira Shopping:\n\n• ${c.whatsapp} pessoas tocaram no seu WhatsApp\n• ${c.ligar} pessoas tocaram em ligar\n• Total: ${total} contatos\n\n${total ? "Esses são clientes da cidade procurando exatamente o que você oferece." : "Ainda poucos contatos: vamos melhorar suas fotos e sua descrição?"}\n\nQualquer dúvida, é só chamar.`;
+  $("#modal").innerHTML = `<h2 id="m-titulo">Relatório para ${esc(e.nome)}</h2><p class="msg">Copie e envie pelo WhatsApp da empresa.</p><textarea class="out" id="rel-txt" readonly>${esc(txt)}</textarea><div class="row" style="margin-top:10px"><div class="fit"><button data-act="copiar">Copiar texto</button></div><div class="fit"><button class="sec" data-act="fechar-rel">Fechar</button></div></div>`;
+  $("#veil").hidden = false; document.body.style.overflow = "hidden";
+}
+function csv() {
+  const q = (v) => `"${String(v).replace(/"/g, '""')}"`, lin = [["Empresa", "Plano", "WhatsApp", "Ligar", "Total"].map(q).join(";")];
+  neg.forEach((e) => { const c = contatos(e.id, periodo); lin.push([q(e.nome), q(PLANOS[e.plano] || e.plano), c.whatsapp, c.ligar, c.whatsapp + c.ligar].join(";")); });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["﻿" + lin.join("\r\n")], { type: "text/csv;charset=utf-8" })); a.download = `contatos-${periodo}-dias.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+onAuthStateChanged(auth, (u) => { $("#login").hidden = !!u; $("#app").hidden = !u; $("#sair").hidden = !u; if (u) carregar(); });
 $("#sair").addEventListener("click", () => signOut(auth));
-onAuthStateChanged(auth, (u) => { $("#login").hidden = !!u; $("#app").hidden = !u; $("#sair").hidden = !u; if (u) listar(); });
 </script>
 </body></html>

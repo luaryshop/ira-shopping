@@ -15,3 +15,13 @@
       allow read: if isAdmin();
       allow update, delete: if false;
     }
+    match /ira_cadastros/{id} {
+      // a empresa envia o próprio cadastro (só estes campos); só o administrador lê, aprova ou apaga.
+      allow create: if request.resource.data.keys().hasOnly(['nome','categoria','whatsapp','status','criadoEm'])
+                    && request.resource.data.nome is string && request.resource.data.nome.size() > 1 && request.resource.data.nome.size() <= 80
+                    && request.resource.data.categoria is string && request.resource.data.categoria.size() <= 30
+                    && request.resource.data.whatsapp is string && request.resource.data.whatsapp.size() <= 25
+                    && request.resource.data.status == 'novo'
+                    && request.resource.data.criadoEm == request.time;
+      allow read, update, delete: if isAdmin();
+    }

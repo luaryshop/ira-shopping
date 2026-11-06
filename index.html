@@ -209,7 +209,7 @@ a{color:inherit}
 
 
 <script type="module">
-import {carregarNegocios,registrarContato,urlFoto,urlLogo} from './ira-data.js';
+import {carregarNegocios,registrarContato,urlFoto,urlLogo,enviarCadastro} from './ira-data.js';
 
 const ICON={
  Comida:'<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 3c-2 2-2 6 0 8v10"/>',
@@ -248,8 +248,8 @@ function status(e,now=new Date()){
   return{on:0,txt:'Fechado'};
 }
 const HUES={Comida:18,Mercado:140,Bebidas:205,Lojas:262,Serviços:42};
-const pic=(e,i)=>urlFoto(e.id,i);
-const avatar=e=>`<span class="av" style="background:hsl(${HUES[e.cat]||210} 55% 40%)">${svg(e.cat)}<img alt="" src="${urlLogo(e.id)}" onerror="this.remove()"></span>`;
+const pic=(e,i)=>urlFoto(e.id,i,e.ver);
+const avatar=e=>`<span class="av" style="background:hsl(${HUES[e.cat]||210} 55% 40%)">${svg(e.cat)}<img alt="" src="${urlLogo(e.id,e.ver)}" onerror="this.remove()"></span>`;
 
 let favs=new Set();try{favs=new Set(JSON.parse(localStorage.getItem('ira-favs')||'[]'))}catch{}
 const saveFavs=()=>{try{localStorage.setItem('ira-favs',JSON.stringify([...favs]))}catch{}};
@@ -297,7 +297,7 @@ const VIEWS={
  favoritos(){const r=E.filter(e=>favs.has(e.id));
    return `<div class="bar"><h2>Favoritos</h2></div><section class="grid">${r.length?r.map(card).join(''):'<div class="empty"><b>Você ainda não salvou nenhuma empresa.</b><br>Toque no coração de um cartão para guardar aqui.</div>'}</section>`},
  perfil(){return `<div class="bar"><h2>Cadastre sua empresa</h2></div>
-  ${st.sent?'<div class="ok" role="status">Recebemos o cadastro! Em um site de verdade, nossa equipe confirma o seu WhatsApp e publica o perfil em até 1 dia útil. (Demonstração: nada foi enviado.)</div>':
+  ${st.err?'<div class="ok" role="alert" style="background:var(--c1)">Não foi possível enviar agora. Tente de novo em instantes.</div>':''}${st.sent?'<div class="ok" role="status">Recebemos o seu cadastro! Nossa equipe confirma o seu WhatsApp e publica o perfil em até 1 dia útil.</div>':
   `<form class="form" id="reg"><label for="r-n">Nome da empresa<input id="r-n" required placeholder="Ex.: Padaria Pão de Praça"></label>
    <label for="r-c">Categoria<select id="r-c">${CATS.map(c=>`<option>${c}</option>`).join('')}</select></label>
    <label for="r-w">WhatsApp<input id="r-w" required inputmode="tel" placeholder="(19) 9 0000-0000"></label>
@@ -364,7 +364,8 @@ document.addEventListener('click',ev=>{
   if(t.closest('#cp')){const n=cur.phone,done=()=>{$('#cp').textContent='Copiado'};
     (navigator.clipboard?navigator.clipboard.writeText(n):Promise.reject()).then(done).catch(()=>{const r=document.createRange();r.selectNodeContents($('#ph'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('#cp').textContent='Selecionado'})}
 });
-document.addEventListener('submit',ev=>{if(ev.target.id==='reg'){ev.preventDefault();st.sent=1;render()}});
+document.addEventListener('submit',async ev=>{if(ev.target.id==='reg'){ev.preventDefault();const btn=ev.target.querySelector('button');btn.disabled=true;
+  try{await enviarCadastro({nome:$('#r-n').value,categoria:$('#r-c').value,whatsapp:$('#r-w').value});st.sent=1;st.err=0}catch{st.err=1}render()}});
 document.addEventListener('keydown',ev=>{if($('#veil').hidden)return;
   if(ev.key==='Escape')closeCo();else if(ev.key==='ArrowRight')slide(idx+1);else if(ev.key==='ArrowLeft')slide(idx-1);
   else if(ev.key==='Tab'){const f=[...$('#sheet').querySelectorAll('button,a[href]')];if(!f.length)return;const a=f[0],z=f[f.length-1];
