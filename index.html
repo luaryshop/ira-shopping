@@ -5,29 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ira Shopping</title>
 <meta name="description" content="Tudo de Iracemápolis num lugar só: comércios e serviços da cidade, com contato direto por WhatsApp.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: app de bairro em coluna única no celular (busca, 5 categorias, filtros rápidos, banner, destaques em 2 colunas) e barra de abas embaixo; no desktop as abas sobem para o topo. */
 :root{
-  --bg:#f5f7fc; --surface:#ffffff; --ink:#0f2557; --muted:#5d6b8c; --line:#dde3f1;
-  --brand:#1b4fc4; --brand-ink:#ffffff; --orange:#f26a1b; --orange-ink:#ffffff;
-  --wa:#128c4a; --wa-ink:#ffffff; --ok:#12803f; --bad:#b4432b; --tint:#e8eefc;
-  --c1:#fdeee3; --c2:#e4f6e8; --c3:#e3f0fd; --c4:#ece9fd; --c5:#fdf3d9; --star:#f5a300;
-  --shadow:0 1px 2px rgba(15,37,87,.06),0 8px 22px rgba(15,37,87,.08);
-  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --bg:#f8f4ec; --surface:#fffdf8; --ink:#0c1b3a; --muted:#66708a; --line:#e6dcc6;
+  --brand:#12285a; --brand-ink:#ffffff; --orange:#b8893a; --orange-ink:#ffffff; --gold:#c9a24d; --gold2:#f0d99a; --navy:#0a1736;
+  --wa:#128c4a; --wa-ink:#ffffff; --ok:#12803f; --bad:#b4432b; --tint:#efe7d4;
+  --c1:#f3ead7; --c2:#f3ead7; --c3:#f3ead7; --c4:#f3ead7; --c5:#f3ead7; --star:#c9a24d;
+  --shadow:0 1px 2px rgba(12,27,58,.06),0 10px 28px rgba(12,27,58,.10);
+  --display:"Cormorant Garamond","Playfair Display",Georgia,serif;
   --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0b1226; --surface:#121c38; --ink:#e8eefc; --muted:#9aa8cc; --line:#233159;
-  --brand:#6f9bff; --brand-ink:#081635; --orange:#ff8a45; --orange-ink:#2a1100;
-  --wa:#2bb673; --wa-ink:#04251c; --ok:#5fd68c; --bad:#f09a82; --tint:#1a2850;
-  --c1:#3a2418; --c2:#173522; --c3:#15304f; --c4:#2a2650; --c5:#3a3016; --star:#ffc233;
+  --bg:#070f22; --surface:#0f1b3a; --ink:#f3ecd9; --muted:#a3adc8; --line:#24335f;
+  --brand:#d9b66a; --brand-ink:#0a1530; --orange:#d9b66a; --orange-ink:#1b1405; --gold:#d9b66a; --gold2:#f0d99a; --navy:#050b1b;
+  --wa:#2bb673; --wa-ink:#04251c; --ok:#5fd68c; --bad:#f09a82; --tint:#17264d;
+  --c1:#16244a; --c2:#16244a; --c3:#16244a; --c4:#16244a; --c5:#16244a; --star:#d9b66a;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0b1226; --surface:#121c38; --ink:#e8eefc; --muted:#9aa8cc; --line:#233159;
-  --brand:#6f9bff; --brand-ink:#081635; --orange:#ff8a45; --orange-ink:#2a1100;
-  --wa:#2bb673; --wa-ink:#04251c; --ok:#5fd68c; --bad:#f09a82; --tint:#1a2850;
-  --c1:#3a2418; --c2:#173522; --c3:#15304f; --c4:#2a2650; --c5:#3a3016; --star:#ffc233;
+  --bg:#070f22; --surface:#0f1b3a; --ink:#f3ecd9; --muted:#a3adc8; --line:#24335f;
+  --brand:#d9b66a; --brand-ink:#0a1530; --orange:#d9b66a; --orange-ink:#1b1405; --gold:#d9b66a; --gold2:#f0d99a; --navy:#050b1b;
+  --wa:#2bb673; --wa-ink:#04251c; --ok:#5fd68c; --bad:#f09a82; --tint:#17264d;
+  --c1:#16244a; --c2:#16244a; --c3:#16244a; --c4:#16244a; --c5:#16244a; --star:#d9b66a;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;
@@ -74,7 +74,7 @@ a{color:inherit}
 @media (min-width:700px){.chips{flex-wrap:wrap}.subs{flex-wrap:wrap}}
 @media (min-width:700px){.cats{max-width:640px;gap:14px}.banner{min-height:190px}.banner svg{width:auto;max-width:none;aspect-ratio:2/1}.banner div{max-width:55%}}
 /* banner */
-.banner{margin-top:18px;border-radius:20px;overflow:hidden;position:relative;background:linear-gradient(100deg,#f26a1b,#ff8a3d);color:#fff;display:flex;min-height:150px}
+.banner{margin-top:18px;border-radius:20px;overflow:hidden;position:relative;background:linear-gradient(120deg,#0a1736,#16306b);color:#fff;display:flex;min-height:150px}
 .banner div{padding:20px;position:relative;z-index:1;max-width:62%}
 .banner h2{font-size:clamp(22px,4.4vw,34px);font-weight:800}
 .banner p{margin:8px 0 0;font-size:14px;opacity:.95}
@@ -174,6 +174,69 @@ a{color:inherit}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 .av{overflow:visible}.av img{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover}
+
+/* ===== Edição luxo: marinho e dourado ===== */
+.bar button{white-space:nowrap}.bar h2{min-width:0}
+body{background:radial-gradient(1200px 500px at 50% -120px,color-mix(in srgb,var(--gold) 14%,transparent),transparent 70%),var(--bg);background-attachment:fixed}
+.wm{font-weight:700;font-size:32px;letter-spacing:.005em}.wm b{color:var(--brand);font-weight:700}.wm i{color:var(--gold);font-style:italic}
+.logo svg rect:first-child{fill:var(--navy)}
+.tag{letter-spacing:.14em;text-transform:uppercase;font-size:10px;color:var(--muted)}
+h1,h2,h3{letter-spacing:0}.bar h2{font-size:30px;font-weight:700}.info h2{font-size:34px;font-weight:700}.cta h3{font-size:26px;font-weight:700}.plan h3{font-size:24px;font-weight:700}.who h3{font-size:19px;font-weight:700}
+.bar h2::after{content:"";display:block;width:42px;height:2px;margin-top:6px;background:linear-gradient(90deg,var(--gold),transparent)}
+.search{border-radius:99px;transition:border-color .25s,box-shadow .25s}.search:focus-within{border-color:var(--gold);box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 22%,transparent),var(--shadow)}
+.fbtn{border-radius:0 99px 99px 0}
+.cat .tile{background:var(--surface)!important;color:var(--brand)!important;border:1.5px solid var(--line);box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+.cat:hover .tile{transform:translateY(-4px);border-color:var(--gold)}
+.cat[aria-pressed="true"] .tile{background:linear-gradient(145deg,var(--navy),#1a3a7a)!important;color:var(--gold2)!important;border-color:var(--gold)}
+.cat[aria-pressed="true"]{color:var(--ink)}
+.cat{font-size:13px;letter-spacing:.02em}
+.chip{transition:background .25s,color .25s,transform .15s}.chip:active,button:active{transform:scale(.97)}
+.chip svg{color:var(--gold)}.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--gold);color:var(--gold2)}.chip[aria-pressed="true"] svg{color:var(--gold2)}
+.banner{border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);box-shadow:0 14px 34px rgba(10,23,54,.28);min-height:170px}
+.banner::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 220px at 85% 10%,rgba(201,162,77,.35),transparent 70%)}
+.banner h2{font-weight:700;font-size:clamp(26px,5vw,40px);color:#fff}.banner p{color:var(--gold2)}
+.banner div{transition:opacity .35s,transform .35s}.banner div.swap{opacity:0;transform:translateY(6px)}
+.banner .par{will-change:transform;animation:floaty 9s ease-in-out infinite}
+.dots{display:flex;gap:6px;margin-top:14px}.dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.35);transition:width .35s,background .35s}.dots i.on{width:22px;background:var(--gold)}
+.card{border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s,border-color .3s;animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.grid .card:nth-child(1){animation-delay:.02s}.grid .card:nth-child(2){animation-delay:.08s}.grid .card:nth-child(3){animation-delay:.14s}.grid .card:nth-child(4){animation-delay:.2s}.grid .card:nth-child(5){animation-delay:.26s}.grid .card:nth-child(6){animation-delay:.32s}.grid .card:nth-child(n+7){animation-delay:.38s}
+@media (hover:hover){.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(10,23,54,.18);border-color:color-mix(in srgb,var(--gold) 60%,var(--line))}}
+.cover{position:relative}.cover::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(to top,rgba(5,11,27,.45),transparent);pointer-events:none}
+.cover img{transition:transform .9s cubic-bezier(.2,.7,.2,1)}.card:hover .cover img{transform:scale(1.07)}
+.pill{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2a1d04;letter-spacing:.08em;text-transform:uppercase;font-size:10px;padding:4px 10px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.prem{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 12px 32px rgba(201,162,77,.25)}
+.prem::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.32) 50%,transparent 60%);transform:translateX(-130%);animation:sheen 7s ease-in-out 1.5s infinite;pointer-events:none}
+.fav{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(10,23,54,.5);transition:transform .2s,background .25s}.fav:hover{transform:scale(1.1)}
+.fav[aria-pressed="true"]{background:#fff}.fav.pop svg{animation:pop .5s cubic-bezier(.2,.9,.3,1.6)}
+.av{border-color:var(--surface);box-shadow:0 0 0 1.5px var(--gold)}
+.mini,.btn.wa{box-shadow:0 0 0 0 rgba(18,140,74,.5);animation:ring 3.2s ease-out infinite}
+.mini{border-radius:99px}.btn{border-radius:99px}
+.btn:not(.wa){border-color:var(--gold)}
+.cta{background:linear-gradient(120deg,var(--navy),#16306b);color:#fff;border:1px solid var(--gold);box-shadow:0 14px 30px rgba(10,23,54,.25);transition:transform .35s cubic-bezier(.2,.8,.2,1)}.cta:hover{transform:translateY(-3px)}
+.cta p{color:var(--gold2)}.cta .chev{color:var(--gold);transition:transform .3s}.cta:hover .chev{transform:translateX(6px)}
+.form{border-radius:20px}.form button{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2a1d04;border-radius:99px;letter-spacing:.03em}
+.plan{border-radius:20px}.plan.hot{border-color:var(--gold);box-shadow:0 0 0 1.5px var(--gold),0 12px 30px rgba(201,162,77,.2)}
+.top{position:sticky;top:0;z-index:25;margin-inline:-16px;padding-inline:16px;background:color-mix(in srgb,var(--bg) 40%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+@media (max-width:899px){.nav{background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid color-mix(in srgb,var(--gold) 45%,var(--line))}}
+.nav button[aria-current="page"]{color:var(--ink)}.nav button[aria-current="page"]::after{background:var(--gold);width:28px}.nav button[aria-current="page"] svg{color:var(--gold)}
+@media (min-width:900px){.nav button[aria-current="page"]{background:var(--navy);color:var(--gold2)}.nav button[aria-current="page"] svg{color:var(--gold2)}}
+.veil{background:rgba(5,11,27,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fade .3s both}
+.sheet{border:1px solid color-mix(in srgb,var(--gold) 50%,transparent);animation:sheetin .5s cubic-bezier(.2,.85,.25,1) both}
+.track img{animation:fade .6s both}
+.thumbs button[aria-current="true"]{border-color:var(--gold)}
+.tags span{background:var(--tint);border:1px solid var(--line)}
+.contact{background:color-mix(in srgb,var(--surface) 90%,transparent)}
+.sk{animation:none}.sk .cover{background:linear-gradient(100deg,var(--tint) 30%,var(--surface) 50%,var(--tint) 70%);background-size:300% 100%;animation:shim 1.4s linear infinite}
+.sk i{display:block;height:12px;border-radius:6px;margin-bottom:10px;width:80%;background:var(--tint)}
+@keyframes rise{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes sheen{0%,55%{transform:translateX(-130%)}85%,100%{transform:translateX(130%)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(18,140,74,.45)}70%,100%{box-shadow:0 0 0 12px rgba(18,140,74,0)}}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes sheetin{from{opacity:0;transform:translateY(40px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@keyframes shim{to{background-position:-300% 0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -182,7 +245,7 @@ a{color:inherit}
 <div class="wrap">
   <header class="top">
     <div class="logo">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="16" fill="var(--brand)"/><path d="M18 26h28l-2.500 22a3 3 0 0 1-3 2.700H23.500a3 3 0 0 1-3-2.700z" fill="#fff"/><path d="M25 26v-3a7 7 0 0 1 14 0v3" fill="none" stroke="#fff" stroke-width="3.500" stroke-linecap="round"/><path d="M32 46s-6-5-6-9.500a6 6 0 0 1 12 0C38 41 32 46 32 46z" fill="#f26a1b"/><circle cx="32" cy="36.500" r="2.200" fill="#fff"/></svg>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="16" fill="var(--brand)"/><path d="M18 26h28l-2.500 22a3 3 0 0 1-3 2.700H23.500a3 3 0 0 1-3-2.700z" fill="#fff"/><path d="M25 26v-3a7 7 0 0 1 14 0v3" fill="none" stroke="#fff" stroke-width="3.500" stroke-linecap="round"/><path d="M32 46s-6-5-6-9.500a6 6 0 0 1 12 0C38 41 32 46 32 46z" fill="#c9a24d"/><circle cx="32" cy="36.500" r="2.200" fill="#fff"/></svg>
       <div><div class="wm"><b>Ira</b> <i>Shopping</i></div><div class="tag">Tudo de Iracemápolis num lugar só</div></div>
     </div>
     <div class="loc"><button id="loc" aria-expanded="false" aria-controls="pop"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z"/></svg><span>Iracemápolis, SP</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
@@ -269,7 +332,7 @@ function card(e){
   const s=status(e);
   const foot=e.t?(e.f===0?`<span class="free">${svg('truck',16).replace('<svg','<svg style="vertical-align:-3px;margin-right:4px"')}Entrega grátis</span>`:`<span>${e.t} · Frete ${brl(e.f)}</span>`)
     :`<span>${e.orc?'Solicitar orçamento':`<span class="st ${s.on?'on':'off'}">${s.on?'Aberto agora':'Fechado agora'}</span>`}</span><a class="mini" data-track="whatsapp" data-id="${e.id}" target="_blank" rel="noopener noreferrer" href="${waLink(e)}">${WA}WhatsApp</a>`;
-  return `<article class="card"><button class="cover" data-open="${e.id}" aria-label="Abrir ${esc(e.name)}"><img loading="lazy" alt="" src="${pic(e,0)}"></button>
+  return `<article class="card${e.plan==='premium'?' prem':''}"><button class="cover" data-open="${e.id}" aria-label="Abrir ${esc(e.name)}"><img loading="lazy" alt="" src="${pic(e,0)}"></button>
   ${e.plan==='premium'?'<span class="pill">Premium</span>':''}
   <button class="fav" data-fav="${e.id}" aria-pressed="${favs.has(e.id)}" aria-label="Salvar ${esc(e.name)}">${HEART}</button>
   <div class="who">${avatar(e)}<div class="txt"><h3><button data-open="${e.id}">${esc(e.name)}</button></h3><div class="rate">${svg('star')}<b>${nota(e.n[0])}</b> (${e.n[1]})</div></div></div>
@@ -282,9 +345,9 @@ const chips=()=>`<div class="chips" role="group" aria-label="Filtros rápidos">
 const cats=()=>`<div class="cats">${CATS.map(c=>`<button class="cat" data-cat="${c}" aria-pressed="${st.cat===c}"><span class="tile">${svg(c)}</span>${c}</button>`).join('')}</div>`;
 const subs=()=>{if(st.cat==='todas')return'';const s=[...new Set(E.filter(e=>e.cat===st.cat).map(e=>e.sub))];
   return `<div class="subs" role="group" aria-label="Subcategorias"><button class="chip" data-sub="" aria-pressed="${!st.sub}">Todas</button>${s.map(x=>`<button class="chip" data-sub="${esc(x)}" aria-pressed="${st.sub===x}">${esc(x)}</button>`).join('')}</div>`};
-const BANNER=`<div class="banner"><div><h2>O comércio de Ira na sua mão</h2><p>Encontre empresas perto de você</p></div>
- <svg viewBox="0 0 300 150" preserveAspectRatio="xMaxYMax slice" aria-hidden="true"><path d="M70 150C80 80 150 40 300 60V150z" fill="#fff" opacity=".14"/><rect x="170" y="62" width="40" height="88" fill="#fff" opacity=".95"/><path d="M164 64l26-30 26 30z" fill="#fff"/><rect x="186" y="12" width="8" height="26" fill="#fff"/><rect x="178" y="18" width="24" height="7" fill="#fff"/><circle cx="190" cy="82" r="9" fill="#f26a1b"/><path d="M190 76v6l4 2" stroke="#fff" stroke-width="2" fill="none"/><rect x="180" y="106" width="20" height="44" rx="10" fill="#f26a1b" opacity=".85"/><path d="M250 150v-52M250 98c-18-4-30 6-34 14M250 98c18-4 30 6 34 14M250 98c-6-14-18-18-28-14M250 98c6-14 18-18 28-14" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/><path d="M118 150v-40M118 110c-12-2-20 4-24 10M118 110c12-2 20 4 24 10" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/></svg></div>`;
-const CTA=`<button class="cta" data-go="perfil"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="26" width="48" height="32" rx="3" fill="#fff"/><path d="M6 26l5-14h42l5 14z" fill="#f26a1b"/><path d="M14 12v14M24 12v14M34 12v14M44 12v14" stroke="#fff" stroke-width="3"/><rect x="14" y="34" width="12" height="12" rx="1.500" fill="#1b4fc4"/><rect x="38" y="34" width="12" height="12" rx="1.500" fill="#1b4fc4"/><rect x="28" y="38" width="9" height="20" fill="#1b4fc4"/></svg><div><h3>Cadastre sua empresa</h3><p>Sua loja ou serviço também pode estar aqui</p></div><span class="chev" aria-hidden="true">›</span></button>`;
+const BANNER=`<div class="banner"><div><h2 data-bt="h">O comércio de Ira na sua mão</h2><p data-bt="p">Encontre empresas perto de você</p><span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span></div>
+ <svg class="par" viewBox="0 0 300 150" preserveAspectRatio="xMaxYMax slice" aria-hidden="true"><path d="M70 150C80 80 150 40 300 60V150z" fill="#fff" opacity=".14"/><rect x="170" y="62" width="40" height="88" fill="#fff" opacity=".95"/><path d="M164 64l26-30 26 30z" fill="#fff"/><rect x="186" y="12" width="8" height="26" fill="#fff"/><rect x="178" y="18" width="24" height="7" fill="#fff"/><circle cx="190" cy="82" r="9" fill="#c9a24d"/><path d="M190 76v6l4 2" stroke="#fff" stroke-width="2" fill="none"/><rect x="180" y="106" width="20" height="44" rx="10" fill="#c9a24d" opacity=".85"/><path d="M250 150v-52M250 98c-18-4-30 6-34 14M250 98c18-4 30 6 34 14M250 98c-6-14-18-18-28-14M250 98c6-14 18-18 28-14" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/><path d="M118 150v-40M118 110c-12-2-20 4-24 10M118 110c12-2 20 4 24 10" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/></svg></div>`;
+const CTA=`<button class="cta" data-go="perfil"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="26" width="48" height="32" rx="3" fill="#fff"/><path d="M6 26l5-14h42l5 14z" fill="#c9a24d"/><path d="M14 12v14M24 12v14M34 12v14M44 12v14" stroke="#fff" stroke-width="3"/><rect x="14" y="34" width="12" height="12" rx="1.500" fill="#12285a"/><rect x="38" y="34" width="12" height="12" rx="1.500" fill="#12285a"/><rect x="28" y="38" width="9" height="20" fill="#12285a"/></svg><div><h3>Cadastre sua empresa</h3><p>Sua loja ou serviço também pode estar aqui</p></div><span class="chev" aria-hidden="true">›</span></button>`;
 const DEMO='<p class="note">Protótipo de demonstração. Empresas, notas, telefones, endereços e fotos são exemplos inventados e não representam comércios reais de Iracemápolis-SP.</p>';
 
 const VIEWS={
@@ -349,7 +412,7 @@ document.addEventListener('click',ev=>{
   const t=ev.target;let b;
   if(b=t.closest('[data-track]'))registrarContato(b.dataset.id,b.dataset.track);
   if(b=t.closest('[data-open]'))return openCo(b.dataset.open);
-  if(b=t.closest('[data-fav]')){const id=b.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);saveFavs();return render()}
+  if(b=t.closest('[data-fav]')){const id=b.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);saveFavs();render();const nb=document.querySelector('[data-fav="'+id+'"]');if(nb&&favs.has(id)){nb.classList.add('pop');}return}
   if(b=t.closest('[data-cat]')){st.cat=st.cat===b.dataset.cat?'todas':b.dataset.cat;st.sub='';return render()}
   if(b=t.closest('[data-sub]')){st.sub=b.dataset.sub;return render()}
   if(b=t.closest('[data-f]')){st[b.dataset.f]=st[b.dataset.f]?0:1;return render()}
@@ -374,7 +437,16 @@ $('#search').addEventListener('submit',e=>{e.preventDefault()});
 $('#q').addEventListener('input',e=>{st.q=e.target.value;if(st.view!=='buscar'&&st.q)go('buscar',true);else render()});
 addEventListener('hashchange',()=>{const h=location.hash.slice(1);
   if(h.startsWith('e-'))openCo(h.slice(2),false);else{closeCo(false);if(VIEWS[h]&&h!==st.view){st.view=h;render()}}});
+const SK='<section class="grid">'+'<div class="card sk"><div class="cover"></div><div style="padding:14px"><i></i><i style="width:55%"></i></div></div>'.repeat(6)+'</section>';
+const REDUZ=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const MSGS=[['O comércio de Ira na sua mão','Encontre empresas perto de você'],['Fale direto com quem atende','WhatsApp ou ligação, sem intermediários'],['Sua empresa em destaque','Cadastre-se e apareça para a cidade inteira']];
+let mi=0;
+if(!REDUZ){setInterval(()=>{const h=document.querySelector('[data-bt=h]'),p=document.querySelector('[data-bt=p]');if(!h||document.hidden)return;
+  const w=h.parentElement;w.classList.add('swap');setTimeout(()=>{mi=(mi+1)%MSGS.length;h.textContent=MSGS[mi][0];p.textContent=MSGS[mi][1];
+  w.querySelectorAll('.dots i').forEach((d,i)=>d.classList.toggle('on',i===mi));w.classList.remove('swap')},350)},6000);
+  let tick=0;addEventListener('scroll',()=>{if(tick)return;tick=requestAnimationFrame(()=>{tick=0;const sv=document.querySelector('.banner .par');if(sv)sv.style.transform='translateY('+Math.min(scrollY*.08,18)+'px)'})},{passive:true})}
 (async()=>{
+  $('#view').innerHTML=SK;
   const {lista,fonte}=await carregarNegocios();E=lista;
   const f=$('#fonte');if(f)f.textContent='Fonte dos dados: '+fonte+' · '+E.length+' empresas';
   const h=location.hash.slice(1);if(VIEWS[h])st.view=h;render();if(h.startsWith('e-'))openCo(h.slice(2),false);

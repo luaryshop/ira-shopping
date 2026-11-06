@@ -19,6 +19,9 @@ No rodapé aparece "Fonte dos dados: …" para você saber de onde vieram.
 2. Abra `admin.html` e entre com o administrador da Luary.
 3. Aba **Empresas** → "Carregar dados de exemplo" grava as 6 empresas no Firestore. O app passa a mostrar "Fonte: Firestore".
 
+## Visual
+Tema marinho e dourado com animações discretas (entrada em cascata, brilho nos cards Premium, galeria suave, banner rotativo). Quem usa "reduzir movimento" no celular não vê as animações.
+
 ## Painel administrativo (`admin.html`)
 - **Resumo**: empresas ativas e pagantes, receita mensal estimada (valores em `PRECOS`, `config.js`), planos vencendo em 15 dias, mais procuradas.
 - **Empresas**: buscar/filtrar, criar, editar (categoria, contatos, horários, plano e validade, entrega, avaliação), pausar e apagar.
