@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ira Shopping | Painel</title>
+<style>
+:root{--bg:#f5f7fc;--ink:#0f2557;--muted:#5d6b8c;--line:#dde3f1;--brand:#1b4fc4;--orange:#f26a1b;--ok:#12803f;--bad:#b4432b;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:24px;margin:0}h1 b{color:var(--brand)}h1 i{color:var(--orange);font-style:normal}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px}
+input{font:inherit;padding:11px;border:1.5px solid var(--line);border-radius:10px;width:100%;margin-top:4px}
+button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;cursor:pointer;background:var(--brand);color:#fff}
+button.sec{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+button:disabled{opacity:.5;cursor:default}
+table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;padding:6px}
+td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:middle}td.n{text-align:right;font-variant-numeric:tabular-nums}
+.tabwrap{overflow-x:auto}
+.pill{font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;background:#e8eefc}
+.pill.on{background:#e2f5e9;color:var(--ok)}.pill.off{background:#fbe9e4;color:var(--bad)}
+.msg{font-size:14px;margin:8px 0 0;color:var(--muted)}.err{color:var(--bad)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body><div class="wrap">
+<header><h1><b>Ira</b> <i>Shopping</i> · Painel</h1><div><a href="index.html">Ver o app</a> · <button class="sec" id="sair" hidden>Sair</button></div></header>
+
+<section class="card" id="login" hidden>
+  <h2 style="margin-top:0">Entrar</h2>
+  <form id="f-login"><label>E-mail<input id="email" type="email" required autocomplete="username"></label>
+  <label style="display:block;margin-top:10px">Senha<input id="senha" type="password" required autocomplete="current-password"></label>
+  <p><button>Entrar</button></p><p class="msg err" id="login-erro"></p></form>
+  <p class="msg">Use o mesmo administrador do Firebase da Luary.</p>
+</section>
+
+<div id="app" hidden>
+  <section class="card">
+    <h2 style="margin-top:0">Dados de exemplo</h2>
+    <p class="msg">Grava no Firestore as 5 categorias e as 6 empresas fictícias de <code>data/negocios.json</code> (coleções <code>ira_*</code>). Pode repetir sem medo: os mesmos documentos são sobrescritos.</p>
+    <p><button id="seed">Carregar dados de exemplo no Firestore</button></p><p class="msg" id="seed-msg"></p>
+  </section>
+  <section class="card">
+    <h2 style="margin-top:0">Empresas e contatos</h2>
+    <div class="tabwrap"><table><thead><tr><th>Empresa</th><th>Plano</th><th>Situação</th><th class="n">WhatsApp</th><th class="n">Ligar</th><th></th></tr></thead><tbody id="linhas"></tbody></table></div>
+    <p class="msg" id="lista-msg"></p><p><button class="sec" id="recarregar">Atualizar</button></p>
+  </section>
+</div>
+</div>
+<script type="module">
+import { app, db, COLECOES } from "./ira-data.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { collection, getDocs, doc, setDoc, updateDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+const auth = getAuth(app), $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const PLANOS = { premium: "Premium", destaque: "Destaque", gratis: "Gratuito" };
+
+async function listar() {
+  $("#lista-msg").textContent = "Carregando…";
+  try {
+    const [n, c] = await Promise.all([getDocs(collection(db, COLECOES.negocios)), getDocs(collection(db, COLECOES.contatos))]);
+    const cont = {};
+    c.docs.forEach((d) => { const x = d.data(); (cont[x.negocioId] ||= { whatsapp: 0, ligar: 0 })[x.tipo]++; });
+    const itens = n.docs.map((d) => ({ id: d.id, ...d.data() })).sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0));
+    $("#linhas").innerHTML = itens.map((e) => `<tr><td><b>${esc(e.nome)}</b><br><small>${esc(e.categoria)} · ${esc(e.subcategoria || "")}</small></td>
+      <td><span class="pill">${PLANOS[e.plano] || esc(e.plano)}</span></td>
+      <td><span class="pill ${e.ativo === false ? "off" : "on"}">${e.ativo === false ? "Pausada" : "Ativa"}</span></td>
+      <td class="n">${cont[e.id]?.whatsapp || 0}</td><td class="n">${cont[e.id]?.ligar || 0}</td>
+      <td><button class="sec" data-id="${esc(e.id)}" data-ativo="${e.ativo === false ? 0 : 1}">${e.ativo === false ? "Ativar" : "Pausar"}</button></td></tr>`).join("");
+    $("#lista-msg").textContent = itens.length ? `${itens.length} empresa(s). Contatos contados: ${c.size}.` : "Nenhuma empresa no Firestore ainda. Use “Carregar dados de exemplo”.";
+  } catch (e) { $("#lista-msg").innerHTML = '<span class="err">Não foi possível ler o Firestore. Confira se as regras do Ira foram publicadas (veja LEIA-ME.md).</span>'; console.error(e); }
+}
+$("#linhas").addEventListener("click", async (ev) => {
+  const b = ev.target.closest("button[data-id]"); if (!b) return; b.disabled = true;
+  try { await updateDoc(doc(db, COLECOES.negocios, b.dataset.id), { ativo: b.dataset.ativo === "0" }); } catch (e) { alert("Sem permissão para alterar. Confira as regras e o login."); }
+  listar();
+});
+$("#seed").addEventListener("click", async () => {
+  const m = $("#seed-msg"); m.className = "msg"; m.textContent = "Gravando…"; $("#seed").disabled = true;
+  try {
+    const dados = await (await fetch("data/negocios.json", { cache: "no-store" })).json();
+    const lote = writeBatch(db);
+    dados.categorias.forEach((c) => lote.set(doc(db, COLECOES.categorias, c.id), c));
+    dados.negocios.forEach((n) => lote.set(doc(db, COLECOES.negocios, n.id), n));
+    await lote.commit();
+    m.textContent = `Pronto: ${dados.categorias.length} categorias e ${dados.negocios.length} empresas gravadas.`; listar();
+  } catch (e) { m.className = "msg err"; m.textContent = "Não foi possível gravar. Publique as regras do Ira e entre com o administrador."; console.error(e); }
+  $("#seed").disabled = false;
+});
+$("#recarregar").addEventListener("click", listar);
+$("#f-login").addEventListener("submit", async (e) => { e.preventDefault(); $("#login-erro").textContent = "";
+  try { await signInWithEmailAndPassword(auth, $("#email").value, $("#senha").value); } catch { $("#login-erro").textContent = "Não foi possível entrar. Confira e-mail e senha."; } });
+$("#sair").addEventListener("click", () => signOut(auth));
+onAuthStateChanged(auth, (u) => { $("#login").hidden = !!u; $("#app").hidden = !u; $("#sair").hidden = !u; if (u) listar(); });
+</script>
+</body></html>

@@ -1,0 +1,17 @@
+// ADICIONE estas linhas às regras que já existem (Firebase → Firestore → Regras),
+// logo abaixo de "match /databases/{database}/documents {" e junto das outras "match /...".
+// NÃO substitua as regras da Luary: elas continuam valendo. A função isAdmin() já existe nelas.
+
+    // ---- Ira Shopping ----
+    match /ira_negocios/{id}   { allow read: if true; allow write: if isAdmin(); }
+    match /ira_categorias/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /ira_contatos/{id} {
+      // qualquer visitante pode REGISTRAR um contato (só estes campos); só o administrador LÊ.
+      allow create: if request.resource.data.keys().hasOnly(['negocioId','tipo','origem','criadoEm'])
+                    && request.resource.data.tipo in ['whatsapp','ligar']
+                    && request.resource.data.negocioId is string && request.resource.data.negocioId.size() < 80
+                    && request.resource.data.origem is string && request.resource.data.origem.size() < 30
+                    && request.resource.data.criadoEm == request.time;
+      allow read: if isAdmin();
+      allow update, delete: if false;
+    }
